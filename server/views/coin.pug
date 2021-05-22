@@ -1,0 +1,32 @@
+
+// valores de formulário predefinidos se recebermos um objeto coindata //
+- coin = typeof(udata) != 'undefined' ? udata : { }
+// armazene o coinId no lado do cliente em um campo de entrada oculto //
+input(type='hidden', value= coin._id)#coinId
+
+#coin-form-container.center-vertical
+	form.card.card-body.bg-light(method='post')#coin-form
+		h2
+		h6#sub Bem vindo ao conversão de moedas
+		hr
+		.form-group.row
+			label.col-sm-3.col-form-label.col-form-label-sm Moeda Origem
+			.col-sm-9
+				input.form-control#name-tf(type='text', name='name', value= coin.name)
+
+		.form-group.row
+			label.col-sm-3.col-form-label.col-form-label-sm Moeda Convertida
+			.col-sm-9
+				input.form-control#name-tf(type='text', name='nameTo', value= coin.name)
+                
+		.form-group.row
+			label.col-sm-3.col-form-label.col-form-label-sm Valor
+			.col-sm-9
+				input.form-control#price-tf(type='text', name='price', value= coin.price)
+		hr
+		.form-buttons
+			button(type='button')#coin-form-btn1.btn.btn-outline-dark
+			button(type='submit')#coin-form-btn2.btn.btn-primary
+
+
+include modals/form-errors
