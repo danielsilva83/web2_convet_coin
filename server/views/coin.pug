@@ -15,7 +15,7 @@ input(type='hidden', value= coin._id)#coinId
 				input.form-control#name-tf(type='text', name='name', value= coin.name)
 
 		.form-group.row
-			label.col-sm-3.col-form-label.col-form-label-sm Moeda Convertida
+			label.col-sm-3.col-form-label.col-form-label-sm Converta em 
 			.col-sm-9
 				input.form-control#name-tf(type='text', name='nameTo', value= coin.name)
                 
@@ -25,7 +25,6 @@ input(type='hidden', value= coin._id)#coinId
 				input.form-control#price-tf(type='text', name='price', value= coin.price)
 		hr
 		.form-buttons
-			button(type='button')#coin-form-btn1.btn.btn-outline-dark
 			button(type='submit')#coin-form-btn2.btn.btn-primary
 
 

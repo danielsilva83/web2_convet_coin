@@ -1,0 +1,79 @@
+
+function AccountValidator()
+{
+//entradas de formulário e grupos de controle //
+
+	this.formFields = [$('#name-tf'), $('#email-tf'), $('#user-tf'), $('#pass-tf')];
+	this.controlGroups = [$('#name-cg'), $('#email-cg'), $('#user-cg'), $('#pass-cg')];
+	
+// anela modal de erro de formulário a este controlador para exibir os erros //
+	
+	this.alert = $('.modal-form-errors');
+	this.alert.modal({ show : false, keyboard : true, backdrop : true});
+	
+	this.validateName = function(s)
+	{
+		return s.length >= 3;
+	}
+	
+	this.validatePassword = function(s)
+	{
+	// se o usuário está logado e não mudou sua senha, retorne ok
+		if ($('#userId').val() && s===''){
+			return true;
+		}	else{
+			return s.length >= 6;
+		}
+	}
+	
+	this.validateEmail = function(e)
+	{
+		var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+		return re.test(e);
+	}
+	
+	this.showErrors = function(a)
+	{
+		$('.modal-form-errors .modal-body p').text('Por favor, corrija os seguintes problemas :');
+		var ul = $('.modal-form-errors .modal-body ul');
+			ul.empty();
+		for (var i=0; i < a.length; i++) ul.append('<li>'+a[i]+'</li>');
+		this.alert.modal('show');
+	}
+
+}
+
+AccountValidator.prototype.showInvalidEmail = function()
+{
+	this.controlGroups[1].addClass('error');
+	this.showErrors(['Esse endereço de email já esta em uso.']);
+}
+
+AccountValidator.prototype.showInvalidUserName = function()
+{
+	this.controlGroups[2].addClass('error');
+	this.showErrors(['Esse nome de usuário já está em uso.']);
+}
+
+AccountValidator.prototype.validateForm = function()
+{
+	var e = [];
+	for (var i=0; i < this.controlGroups.length; i++) this.controlGroups[i].removeClass('error');
+	if (this.validateName(this.formFields[0].val()) == false) {
+		this.controlGroups[0].addClass('error'); e.push('Por favor, insira seu nome');
+	}
+	if (this.validateEmail(this.formFields[1].val()) == false) {
+		this.controlGroups[1].addClass('error'); e.push('Por favor digite um email válido');
+	}
+	if (this.validateName(this.formFields[2].val()) == false) {
+		this.controlGroups[2].addClass('error');
+		e.push('Escolha um nome de usuário');
+	}
+	if (this.validatePassword(this.formFields[3].val()) == false) {
+		this.controlGroups[3].addClass('error');
+		e.push('A senha deve ter no mínimo 6 caracteres');
+	}
+	if (e.length) this.showErrors(e);
+	return e.length === 0;
+}
+
