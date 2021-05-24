@@ -1,10 +1,10 @@
 {
-  "name": "convcoin",
+  "name": "node-login",
   "version": "1.8.0",
   "description": "Convert Cont",
   "author": "Daniel",
   "website": {
-    "url": ""
+    "url": "https://web2convertcoin.herokuapp.com"
   },
   "private": false,
   "repository": {
