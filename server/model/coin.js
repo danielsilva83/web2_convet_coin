@@ -1,8 +1,11 @@
-
-const crypto 		= require('crypto');
 const moment 		= require('moment');
 
 let coin = undefined;
+module.exports.init = function(db){
+	coin = db.collection('coin');
+// campos de índice 'usuário' e 'e-mail' para uma validação de conta mais rápida //
+	coin.createIndex({name_coin: 1});
+}
 
 /*
 	métodos de inserção, atualização e exclusão de registro

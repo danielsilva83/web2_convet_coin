@@ -1,5 +1,6 @@
 
 const accounts = require('./model/accounts');
+const coin = require('./model/coin');
 const emailjs = require('./utils/emailjs');
 const countries = require('./json/countries');
 
@@ -189,18 +190,18 @@ module.exports = function(app) {
 
 	app.get('*', function(req, res) { res.render('404', { title: 'Página não encontrada'}); });
 
-};
-
-/*
+	/*
 	nova moeda
 */
 
-app.get('/add_coin', function(req, res) {
-	res.render('add_coin', {  title: 'Nova Moeda', countries : countries });
+app.get('/coin', function(req, res) {
+	coin.getAllRecords( function(e, name_coin){
+		res.render('coin', { title : 'Nova Moeda', name_coin : name_coin });
+	})
 });
 
-app.post('/add_coin', function(req, res){
-	accounts.addNewAccount({
+app.post('/coin', function(req, res){
+	coin.addNewAccount({
 		name_coin 	: req.body['name_coin'],
 		price 		: req.body['price'],
 		date_price 	: req.body['date_price'],
@@ -213,3 +214,6 @@ app.post('/add_coin', function(req, res){
 		}
 	});
 });
+};
+
+

@@ -8,6 +8,6 @@ express.log('./logs');
 
 express.http(app);
 
-express.init(__dirname, app, 'node-login', true);
+express.init(__dirname, app, 'convcoin', true);
 
 express.start(app);

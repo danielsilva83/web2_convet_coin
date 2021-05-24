@@ -10,5 +10,4 @@ module.exports = function(app, express) {
 	app.use(express.static(__dirname + '/public'));
 	require(__dirname + '/server/model/database')(app);
 	require(__dirname + '/server/routes')(app);
-
 }
